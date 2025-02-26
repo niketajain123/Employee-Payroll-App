@@ -1,11 +1,15 @@
 package com.bridgelabz.EmployeePayrollApp.controller;
 
 import com.bridgelabz.EmployeePayrollApp.dto.EmployeeDTO;
+import com.bridgelabz.EmployeePayrollApp.service.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController {
+    @Autowired
+    EmployeeService employeeService;
     @GetMapping("/welcome")
     public String welcomeMessage(){
         return "Welcome to employee payroll application.";
@@ -22,5 +26,9 @@ public class EmployeeController {
     @DeleteMapping("/delete")
     public String deleteEmployee(){
         return "Employee deleted succesfully";
+    }
+    @GetMapping("/details")
+    public String getEmployeeDetails(){
+        return employeeService.getEmployeeDetails().toString();
     }
 }
