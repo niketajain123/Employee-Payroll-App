@@ -5,6 +5,8 @@ import com.bridgelabz.EmployeePayrollApp.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController {
@@ -16,19 +18,28 @@ public class EmployeeController {
     }
     @PostMapping("/add")
     public String addEmployee(@RequestBody EmployeeDTO employee) {
-        return employee.toString();
+        return employeeService.addEmployee(employee);
     }
 
-    @PutMapping("/update")
-    public String updateEmployee(){
-        return "Employee updated succesfully";
+    @PutMapping("/update/{name}")
+    public String updateEmployee(@PathVariable String name,@RequestBody EmployeeDTO employee){
+        return employeeService.updateEmployeeByName(name,employee);
     }
-    @DeleteMapping("/delete")
-    public String deleteEmployee(){
-        return "Employee deleted succesfully";
+    @DeleteMapping("/delete/{name}")
+    public String deleteEmployee(@PathVariable String name){
+        return employeeService.deleteEmployeeByName(name);
     }
     @GetMapping("/details")
     public String getEmployeeDetails(){
-        return employeeService.getEmployeeDetails().toString();
+        String allEmployees="";
+        List<EmployeeDTO> allEmployeeList=employeeService.getAllEmployee();
+        for(EmployeeDTO employee:allEmployeeList){
+            allEmployees+=employee.toString()+"\n";
+        }
+        return allEmployees;
+    }
+    @GetMapping("/employeeDetail/{name}")
+    public String employeeDetail(@PathVariable String name){
+        return employeeService.getEmployeeByName(name);
     }
 }
