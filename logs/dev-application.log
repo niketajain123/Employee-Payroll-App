@@ -72,3 +72,8 @@
 2025-03-01T10:43:20.956+05:30  INFO 6224 --- [EmployeePayrollApp] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
 2025-03-01T10:43:20.987+05:30  INFO 6224 --- [EmployeePayrollApp] [restartedMain] c.b.E.EmployeePayrollAppApplication      : Started EmployeePayrollAppApplication in 8.637 seconds (process running for 9.578)
 2025-03-01T10:43:20.994+05:30  INFO 6224 --- [EmployeePayrollApp] [restartedMain] c.b.E.EmployeePayrollAppApplication      : Employee Payroll app started...
+2025-03-01T10:52:40.800+05:30  INFO 6224 --- [EmployeePayrollApp] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-03-01T10:52:41.067+05:30  INFO 6224 --- [EmployeePayrollApp] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-03-01T10:52:41.073+05:30  INFO 6224 --- [EmployeePayrollApp] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-03-01T10:52:41.078+05:30  INFO 6224 --- [EmployeePayrollApp] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-03-01T10:52:41.089+05:30  INFO 6224 --- [EmployeePayrollApp] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
