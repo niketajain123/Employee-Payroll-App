@@ -1,5 +1,7 @@
 package com.bridgelabz.EmployeePayrollApp.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,19 +14,25 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id;//Auto-generated ID
+
     private String name;
     private Double salary;
     private String gender;
+
+    @JsonFormat(pattern = "dd MMM yyyy")
     private LocalDate startDate;
     private String note;
     private String profilePic;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "employee_department", joinColumns = @JoinColumn(name = "employee_id"))
+    @Column(name = "department")
     private List<String> department;
 
     public Employee(String name, Double salary, String gender, LocalDate startDate, String note, String profilePic, List<String> department) {
