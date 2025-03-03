@@ -1,5 +1,4 @@
 package com.bridgelabz.EmployeePayrollApp.service;
-
 import com.bridgelabz.EmployeePayrollApp.dto.EmployeeDTO;
 import com.bridgelabz.EmployeePayrollApp.exception.EmployeeNotFoundException;
 import com.bridgelabz.EmployeePayrollApp.model.Employee;
@@ -17,10 +16,13 @@ public class EmployeeService {
 
     // Create Employee
     public EmployeeDTO addEmployee(EmployeeDTO employeeDTO) {
-        Employee employee = new Employee(idCounter++, employeeDTO.getName(), employeeDTO.getSalary());
+        Employee employee = new Employee(idCounter++, employeeDTO.getName(), employeeDTO.getSalary(),
+                employeeDTO.getGender(), employeeDTO.getStartDate(), employeeDTO.getNote(),
+                employeeDTO.getProfilePic(), employeeDTO.getDepartment());
         employeeList.add(employee);
         log.info("ADDED EMPLOYEE: {}", employee);
-        return new EmployeeDTO(employee.getName(), employee.getSalary());
+        return new EmployeeDTO(employee.getName(), employee.getSalary(), employee.getGender(),
+                employee.getStartDate(), employee.getNote(), employee.getProfilePic(), employee.getDepartment());
     }
 
     // Get all Employees
@@ -48,11 +50,17 @@ public class EmployeeService {
             if (emp.getId().equals(id)) {
                 emp.setName(employeeDTO.getName());
                 emp.setSalary(employeeDTO.getSalary());
+                emp.setGender(employeeDTO.getGender());
+                emp.setStartDate(employeeDTO.getStartDate());
+                emp.setNote(employeeDTO.getNote());
+                emp.setProfilePic(employeeDTO.getProfilePic());
+                emp.setDepartment(employeeDTO.getDepartment());
                 log.info("UPDATED EMPLOYEE: {}", emp);
-                return new EmployeeDTO(emp.getName(), emp.getSalary());
+                return new EmployeeDTO(emp.getName(), emp.getSalary(), emp.getGender(),
+                        emp.getStartDate(), emp.getNote(), emp.getProfilePic(), emp.getDepartment());
             }
         }
-        log.warn("Employee with ID {} not found!", id);
+        log.warn("Employee with ID {} not found!!", id);
         throw new EmployeeNotFoundException("Employee with ID " + id + " not found!");
     }
 
@@ -66,7 +74,7 @@ public class EmployeeService {
                 return true;
             }
         }
-        log.warn("Employee with ID  {} not found", id);
+        log.warn("Employee with ID {} not found!", id);
         throw new EmployeeNotFoundException("Employee with ID " + id + " not found!");
     }
 }
