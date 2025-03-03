@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,5 +44,23 @@ public class GlobalExceptionHandler {
         errorDetails.put("error", "Employee Not Found");
         errorDetails.put("message", ex.getMessage());
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
+
+    // Handle Incorrect Date Format
+    @ExceptionHandler(DateTimeParseException.class)
+    public ResponseEntity<String> handleDateTimeParseException(DateTimeParseException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid date format! Please use 'dd MMM yyyy' (e.g., 01 Mar 2025).");
+    }
+
+    // Handle Custom InvalidDateFormatException
+    @ExceptionHandler(InvalidDateFormatException.class)
+    public ResponseEntity<String> handleInvalidDateFormat(InvalidDateFormatException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+
+    // Handle Generic Exceptions
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleGenericException(Exception ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred: " + ex.getMessage());
     }
 }
