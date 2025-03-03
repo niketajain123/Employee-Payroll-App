@@ -71,4 +71,11 @@ public class EmployeeController {
             return ResponseEntity.status(404).body("Employee not found");
         }
     }
+
+    //Fetch employees by department
+    @GetMapping("/department/{department}")
+    public List<Employee> getEmployeesByDepartment(@PathVariable String department) {
+        log.info("Fetching employees in Sales department");
+        return employeeService.getEmployeesByDepartment(department);
+    }
 }
