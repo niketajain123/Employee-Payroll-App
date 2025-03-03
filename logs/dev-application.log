@@ -34,3 +34,9 @@
 2025-03-03T10:15:29.225+05:30  INFO 15900 --- [EmployeePayrollApp] [restartedMain] c.b.E.EmployeePayrollAppApplication      : Started EmployeePayrollAppApplication in 9.564 seconds (process running for 10.611)
 2025-03-03T10:15:29.232+05:30  INFO 15900 --- [EmployeePayrollApp] [restartedMain] c.b.E.EmployeePayrollAppApplication      : Employee Payroll app started...
 2025-03-03T10:15:29.233+05:30  INFO 15900 --- [EmployeePayrollApp] [restartedMain] c.b.E.EmployeePayrollAppApplication      : Employee Payroll DB User is root 
+2025-03-03T10:24:03.472+05:30  WARN 15900 --- [EmployeePayrollApp] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m7s430ms959µs).
+2025-03-03T10:27:24.305+05:30  INFO 15900 --- [EmployeePayrollApp] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-03-03T10:27:24.543+05:30  INFO 15900 --- [EmployeePayrollApp] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-03-03T10:27:24.551+05:30  INFO 15900 --- [EmployeePayrollApp] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-03-03T10:27:24.559+05:30  INFO 15900 --- [EmployeePayrollApp] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-03-03T10:27:24.584+05:30  INFO 15900 --- [EmployeePayrollApp] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

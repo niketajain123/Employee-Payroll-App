@@ -1,5 +1,4 @@
 package com.bridgelabz.EmployeePayrollApp.controller;
-
 import com.bridgelabz.EmployeePayrollApp.dto.EmployeeDTO;
 import com.bridgelabz.EmployeePayrollApp.model.Employee;
 import com.bridgelabz.EmployeePayrollApp.service.EmployeeService;
@@ -8,20 +7,23 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-@Slf4j
 
+@Slf4j
 @RestController
-@RequestMapping("/employees")
+@RequestMapping("/employee")
+@CrossOrigin(origins = "*")
 public class EmployeeController {
+
     @Autowired
-    EmployeeService employeeService;
+    private EmployeeService employeeService;
+
     @GetMapping("/welcome")
     public ResponseEntity<String> welcomeMessage() {
         return ResponseEntity.ok("Welcome to Employee Payroll App!");
     }
 
+    // Create Employee with Validation
     @PostMapping("/add")
     public ResponseEntity<EmployeeDTO> addEmployee(@Valid @RequestBody EmployeeDTO employeeDTO) {
         log.debug("Received Employee Data: {}", employeeDTO);
@@ -30,8 +32,24 @@ public class EmployeeController {
         return ResponseEntity.ok(savedEmployee);
     }
 
+    // Get All Employees
+    @GetMapping
+    public ResponseEntity<List<Employee>> getAllEmployees() {
+        log.info("Fetching all employees");
+        List<Employee> employees = employeeService.getAllEmployees();
+        log.info("Total Employees Retrieved: {}", employees.size());
+        return ResponseEntity.ok(employees);
+    }
 
+    // Get Employee by ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
+        log.info("Fetching employee with ID : {}", id);
+        Employee employee = employeeService.getEmployeeById(id);
+        return ResponseEntity.ok(employee);
+    }
 
+    // Update Employee with Validation
     @PutMapping("/update/{id}")
     public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable Long id, @Valid @RequestBody EmployeeDTO employeeDTO) {
         log.info("Updating employee with ID: {}", id);
@@ -40,8 +58,7 @@ public class EmployeeController {
         return ResponseEntity.ok(updatedEmployee);
     }
 
-
-
+    // Delete Employee By Id
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteEmployee(@PathVariable Long id) {
         log.warn("Received request to delete employee with ID: {}", id);
@@ -54,23 +71,4 @@ public class EmployeeController {
             return ResponseEntity.status(404).body("Employee not found");
         }
     }
-
-
-    @GetMapping("/details")
-    public List<Employee> getAllEmployees() {
-        log.info("Fetching all employees");
-        List<Employee> employees = employeeService.getAllEmployees();
-        log.info("Total Employees Retrieved: {}", employees.size());
-        return employeeService.getAllEmployees();
-    }
-
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
-        log.info("Fetching employee with ID : {}", id);
-        Employee employee = employeeService.getEmployeeById(id);
-        return ResponseEntity.ok(employee);
-    }
-
-
 }
